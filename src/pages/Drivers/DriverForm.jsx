@@ -32,55 +32,110 @@ export default function DriverForm() {
         } catch (err) {
             console.log("Full error:", err);
             if (err.response) {
-                console.log("Response data:", err.response.data);
                 alert("API error: " + JSON.stringify(err.response.data));
             } else if (err.request) {
-                console.log("No response received:", err.request);
                 alert("No response from server. Check API URL and CORS.");
             } else {
-                console.log("Other error:", err.message);
                 alert("Error: " + err.message);
             }
         }
-
-        
     };
 
     return (
-        <div>
-            <h2>{id ? "Edit" : "New"} Driver</h2>
-            <div>
-                <input
-                    placeholder="Name"
-                    value={driver.driName}
-                    onChange={(e) => setDriver({ ...driver, driName: e.target.value })}
-                />
-            </div>
-            <div>
-                <input
-                    placeholder="License Number"
-                    value={driver.licenseNum}
-                    onChange={(e) => setDriver({ ...driver, licenseNum: e.target.value })}
-                />
-            </div>
-            <div>
-                <input
-                    placeholder="Contact"
-                    value={driver.contact}
-                    onChange={(e) => setDriver({ ...driver, contact: e.target.value })}
-                />
-            </div>
-            <div>
-                <label>
-                    Available:
+        <div style={container}>
+            <div style={card}>
+                <h2 style={{ marginBottom: "15px" }}>
+                    {id ? "Edit" : "New"} Driver
+                </h2>
+
+                <div style={group}>
+                    <label style={label}>Name</label>
                     <input
-                        type="checkbox"
-                        checked={driver.isAvailable}
-                        onChange={(e) => setDriver({ ...driver, isAvailable: e.target.checked })}
+                        style={input}
+                        value={driver.driName}
+                        onChange={(e) => setDriver({ ...driver, driName: e.target.value })}
                     />
-                </label>
+                </div>
+
+                <div style={group}>
+                    <label style={label}>License Number</label>
+                    <input
+                        style={input}
+                        value={driver.licenseNum}
+                        onChange={(e) => setDriver({ ...driver, licenseNum: e.target.value })}
+                    />
+                </div>
+
+                <div style={group}>
+                    <label style={label}>Contact</label>
+                    <input
+                        style={input}
+                        value={driver.contact}
+                        onChange={(e) => setDriver({ ...driver, contact: e.target.value })}
+                    />
+                </div>
+
+                <div style={{ marginBottom: "15px" }}>
+                    <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                        <input
+                            type="checkbox"
+                            checked={driver.isAvailable}
+                            onChange={(e) => setDriver({ ...driver, isAvailable: e.target.checked })}
+                        />
+                        Available
+                    </label>
+                </div>
+
+                <div style={{ display: "flex", gap: "10px" }}>
+                    <button style={saveBtn} onClick={saveDriver}>Save</button>
+                    <button style={cancelBtn} onClick={() => nav("/drivers")}>Cancel</button>
+                </div>
             </div>
-            <button onClick={saveDriver}>Save</button>
         </div>
     );
 }
+
+const container = {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "40px",
+    fontFamily: "Arial"
+};
+
+const card = {
+    width: "420px",
+    padding: "20px",
+    borderRadius: "10px",
+    boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
+    background: "#fff"
+};
+
+const group = { marginBottom: "12px" };
+
+const label = { fontSize: "14px", marginBottom: "4px", display: "block" };
+
+const input = {
+    width: "100%",
+    padding: "8px",
+    fontSize: "14px",
+    borderRadius: "5px",
+    border: "1px solid #ccc"
+};
+
+const saveBtn = {
+    background: "#1976d2",
+    color: "white",
+    padding: "8px 16px",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer"
+};
+
+const cancelBtn = {
+    background: "#777",
+    color: "white",
+    padding: "8px 16px",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer"
+};

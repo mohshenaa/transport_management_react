@@ -32,30 +32,99 @@ export default function VehicleForm() {
     };
 
     return (
-        <div>
-            <h2>{id ? "Edit" : "New"} Vehicle</h2>
-            <input
-                placeholder="Vehicle Number"
-                value={vehicle.viclNum}
-                onChange={(e) => setVehicle({ ...vehicle, viclNum: e.target.value })}
-            />
-            <input
-                placeholder="Model"
-                value={vehicle.viclModel}
-                onChange={(e) => setVehicle({ ...vehicle, viclModel: e.target.value })}
-            />
-            <input
-                type="number"
-                placeholder="Capacity"
-                value={vehicle.capacity}
-                onChange={(e) => setVehicle({ ...vehicle, capacity: Number(e.target.value) })}
-            />
-            <input
-                placeholder="Status"
-                value={vehicle.status}
-                onChange={(e) => setVehicle({ ...vehicle, status: e.target.value })}
-            />
-            <button onClick={saveVehicle}>Save</button>
+        <div style={container}>
+            <div style={card}>
+                <h2 style={{ marginBottom: "15px" }}>
+                    {id ? "Edit" : "New"} Vehicle
+                </h2>
+
+                <div style={group}>
+                    <label style={label}>Vehicle Number</label>
+                    <input
+                        style={input}
+                        value={vehicle.viclNum}
+                        onChange={(e) => setVehicle({ ...vehicle, viclNum: e.target.value })}
+                    />
+                </div>
+
+                <div style={group}>
+                    <label style={label}>Model</label>
+                    <input
+                        style={input}
+                        value={vehicle.viclModel}
+                        onChange={(e) => setVehicle({ ...vehicle, viclModel: e.target.value })}
+                    />
+                </div>
+
+                <div style={group}>
+                    <label style={label}>Capacity</label>
+                    <input
+                        style={input}
+                        type="number"
+                        value={vehicle.capacity}
+                        onChange={(e) => setVehicle({ ...vehicle, capacity: Number(e.target.value) })}
+                    />
+                </div>
+
+                <div style={group}>
+                    <label style={label}>Status</label>
+                    <input
+                        style={input}
+                        value={vehicle.status}
+                        onChange={(e) => setVehicle({ ...vehicle, status: e.target.value })}
+                    />
+                </div>
+
+                <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
+                    <button style={saveBtn} onClick={saveVehicle}>Save</button>
+                    <button style={cancelBtn} onClick={() => nav("/vehicles")}>Cancel</button>
+                </div>
+            </div>
         </div>
     );
 }
+
+const container = {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "40px",
+    fontFamily: "Arial"
+};
+
+const card = {
+    width: "420px",
+    padding: "20px",
+    borderRadius: "10px",
+    boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
+    background: "#fff"
+};
+
+const group = { marginBottom: "12px" };
+
+const label = { fontSize: "14px", marginBottom: "4px", display: "block" };
+
+const input = {
+    width: "100%",
+    padding: "8px",
+    fontSize: "14px",
+    borderRadius: "5px",
+    border: "1px solid #ccc"
+};
+
+const saveBtn = {
+    background: "#1976d2",
+    color: "white",
+    padding: "8px 16px",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer"
+};
+
+const cancelBtn = {
+    background: "#777",
+    color: "white",
+    padding: "8px 16px",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer"
+};
